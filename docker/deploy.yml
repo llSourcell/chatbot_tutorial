@@ -1,0 +1,16 @@
+version: '2'
+services:
+  web:
+    image: deepqa:latest
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=0
+    volumes:
+      - ${DEEPQA_WORKDIR}/logs:/root/DeepQA/chatbot_website/logs
+      - ${DEEPQA_WORKDIR}/save:/root/DeepQA/save
+      - ${DEEPQA_WORKDIR}/data:/root/DeepQA/data
+    depends_on:
+      - redis
+  redis:
+    image: redis
